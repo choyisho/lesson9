@@ -1,3 +1,10 @@
-<%- include('header')%>
+<%- include('header') %>
 <p><%= text%></p>
-<%- include('footer')%>
+<% userData.forEach(function(essay) { %>
+  <h1><%= essay.title %></h1>
+  <p><%= essay.content.slice(0,100) %></p>
+  <% if (essay.content.length > 100) { %>
+    ......<a href = "/post/<%= essay.id %>" >Read More</a>
+    <% } %>
+<% }); %>
+<%- include('footer') %>

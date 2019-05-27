@@ -1,0 +1,7 @@
+<%- include('header') %>
+<p><%= text%></p>
+<% userData.forEach(function(essay) { %>
+  <h1><%= essay.title %></h1>
+  <p class = "text-wrap"><%= essay.content %></p>
+<% }); %>
+<%- include('footer') %>
