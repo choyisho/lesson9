@@ -1,8 +1,8 @@
 //jshint esversion:6
-
+require('./config.js');
 const mongoose = require('mongoose');
-const username = 'admin';
-const password = '7024dste16';
+const username = process.env.DB_USER;
+const password = process.env.DB_PASS;
 const dbname = 'blog';
 const url = `mongodb+srv://${username}:${password}@cluster0-ugetv.mongodb.net/${dbname}`;
 
