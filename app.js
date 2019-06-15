@@ -20,9 +20,11 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 
 app.get('/', (req, res) => {
-  res.render('home', {
-    userData: pm.findAll(),
-    text: homeStartingContent
+  pm.findAll((err, rows) => {
+    res.render('home', {
+      userData: rows,
+      text: homeStartingContent
+    });
   });
 });
 
@@ -32,15 +34,16 @@ app.get('/home', (req, res) => {
 
 
 app.get('/post/:id', (req, res) => {
-  const post = pm.findById(req.params.id);
-      if (post) {
-        res.render('post', {
-          userData: [].push(post),
-          text: homeStartingContent
-        });
-      } else {
-        res.redirect('/');
-      }
+  const post = pm.findById(req.params.id,(err, post) => {
+    if (post) {
+      res.render('post', {
+        userData: [].push(post),
+        text: homeStartingContent
+      });
+    } else {
+      res.redirect('/');
+    }
+  });
 });
 
 app.get('/about', (req, res) => {
@@ -62,8 +65,9 @@ app.get('/compose', (req, res) => {
 });
 
 app.post('/compose', (req, res) => {
-  pm.create(req.body.title, req.body.content);
-  res.redirect('/');
+  pm.create(req.body.title, req.body.content, err => {
+    res.redirect('/');
+  });
 });
 
 app.listen(3000, function() {
