@@ -1,5 +1,4 @@
 //jshint esversion:6
-const dotenv = reuire('dotenv');
 require('./config.js');
 const express = require("express");
 const bodyParser = require("body-parser");
